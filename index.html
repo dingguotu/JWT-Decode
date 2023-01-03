@@ -1,0 +1,72 @@
+<!--
+ * @Author: 涂定国 1335162473@qq.com
+ * @Date: 2022-01-27 10:54:07
+ * @LastEditors: 涂定国 1335162473@qq.com
+ * @LastEditTime: 2023-01-03 14:45:35
+ * @FilePath: \JWT Decode\index.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html>
+<head>    
+    <link rel="stylesheet" href="css/json-viewer.css">
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+        
+        #inputBox {
+            width: 100%;
+            min-height: 150px;
+            resize:none;
+            background-color: #ffffff;
+            color: #5f5f5f;
+            border: #c9c9c9 1px solid;
+            outline: none;
+        }
+
+        #inputBox::-webkit-scrollbar {
+            width: 4px;
+            background-color: #ffffff;
+        }
+
+        #inputBox::-webkit-scrollbar-thumb {
+            border-radius: 2px;
+            background-color: rgba(117, 117, 117, 0.3);
+        }
+
+        #output {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="inputBox" oninput="jwtDecode()" placeholder="请输入JWT密文"></textarea>
+    <div id="output" style="display: none;">
+        <p>header</p>
+        <pre id="header"></pre>
+        <p>payload</p>
+        <pre id="payload"></pre>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/base64.js"></script>
+    <script src="js/jsonlint.js"></script>
+    <script src="js/json-viewer.js"></script>
+    <script>
+        function jwtDecode() {
+            document.getElementById("output").style.display = 'block';
+            var token = document.getElementById("inputBox").value;
+            var headerUrl = token.split('.')[0];
+            var header = headerUrl.replace(/-/g, '+').replace(/_/g, '/');
+            $('#header').jsonViewer(jsonlint.parse(BASE64.decode(header)));
+
+            var payloadUrl = token.split('.')[1];
+            var payload = payloadUrl.replace(/-/g, '+').replace(/_/g, '/');
+            $('#payload').jsonViewer(jsonlint.parse(BASE64.decode(payload)));
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+{
+	"pluginName": "JWT Decode",
+	"description": "JWT插件",
+	"main": "index.html",
+	"version": "0.0.3",
+	"author": "tinko",
+	"logo":"favicon.png",
+	"features": [
+		{
+		  "code": "decode",
+		  "explain": "JWT Decode",
+			"cmds":["jwt", "decode"]
+		}
+	]
+}
